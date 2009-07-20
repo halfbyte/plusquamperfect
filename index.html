@@ -7,25 +7,28 @@
   <style type="text/css">
     #day-list-wrapper {
       overflow: hidden;
-      height: 40px;
+      height: 30px;
       
     }
     #day-list { 
       list-style-type: none;
-      height: 40px;
+      height: 30px;
       margin:0;
       padding:0;
       float:left;
+      display:block;
     }
     #day-list li {
-      width: 41px; height: 30px; float: left; display: block; margin:0; padding:4px; border:1px solid black; 
+      width: 41px; height: 20px; float: left; display: block; margin:0; padding:4px; border:1px solid black; 
       border-width: 1px 0 1px 1px;
-      text-align:center;
+      text-align:left;
+      overflow: visible;
     }
   </style>
   
   <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
   <script type="text/javascript">
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     var dates = []
     var playing =false;
     $(document).ready(function(event) {
@@ -43,7 +46,7 @@
       $("#day-list-wrapper").append("<ul id='day-list'></ul>");
       for(i=0;i<fullTimeInDays;i++) {
         var thisDay = new Date(dates[0].date - (-3600000 * 24 * i))
-        $("#day-list").append("<li>" + thisDay.getDate() + "</li>");
+        $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? " -- " + months[thisDay.getMonth()] : "")+ "</li>");
       }
       $("#click-prev").click(function(event) {
         move(-1);
