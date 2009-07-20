@@ -7,7 +7,7 @@
   <style type="text/css">
     #day-list-wrapper {
       overflow: hidden;
-      height: 30px;
+      height: 70px;
       
     }
     #day-list { 
@@ -17,13 +17,17 @@
       padding:0;
       float:left;
       display:block;
-    }
-    #day-list li {
-      width: 41px; height: 20px; float: left; display: block; margin:0; padding:4px; border:1px solid black; 
-      border-width: 1px 0 1px 1px;
-      text-align:left;
       overflow: visible;
     }
+    #day-list li {
+      width: 20px; height: 20px; float: left; display: block; margin:0; padding:5px; 
+      text-align:left;
+      overflow: visible;
+      margin-bottom:40px;
+    }
+    
+    #day-list li span { font-size: 2em; display: block; width: 300px;}
+    
   </style>
   
   <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
@@ -46,7 +50,7 @@
       $("#day-list-wrapper").append("<ul id='day-list'></ul>");
       for(i=0;i<fullTimeInDays;i++) {
         var thisDay = new Date(dates[0].date - (-3600000 * 24 * i))
-        $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? " -- " + months[thisDay.getMonth()] : "")+ "</li>");
+        $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? "<span class='month'>" + months[thisDay.getMonth()] + " " + thisDay.getFullYear() + "</span>" : "")+ "</li>");
       }
       $("#click-prev").click(function(event) {
         move(-1);
@@ -64,18 +68,19 @@
       
       
       function optimizeList() {
-        var num = parseInt($('#day-list').css('margin-left')) / 50;
+        var num = parseInt($('#day-list').css('margin-left')) / 30;
         if ((-num) > 10) {
           var toRemove = (-num) - 10;
           jQuery.each($('#day-list').children().slice(0,toRemove), function(i,v) {$(v).remove()});
-          $('#day-list').css('margin-left', '-500px');
+          $('#day-list').css('margin-left', '-300px');
         }
       }
       
       function move(dir) {
-        var newMargin = (parseInt($("#day-list").css("margin-left")) - (50 * dir)) + "px";
-        $("#day-list").animate({ marginLeft: newMargin}, 200, "swing", function(e) {
+        var newMargin = (parseInt($("#day-list").css("margin-left")) - (30 * dir)) + "px";
+        $("#day-list").animate({ marginLeft: newMargin}, 600, "swing", function(e) {
           optimizeList();
+           window.setTimeout(updateAnim, 400);
         } );
         
       }
@@ -85,8 +90,7 @@
       function updateAnim() {
         if(playing) {
           move(1);
-        }
-        window.setTimeout(updateAnim, 1000);
+        } else window.setTimeout(updateAnim, 1000);
       }     
       window.setTimeout(updateAnim, 1000);
       
