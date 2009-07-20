@@ -18,7 +18,9 @@
       float:left;
     }
     #day-list li {
-      width: 50px; height: 40px; float: left; display: block; margin:0; padding:0;
+      width: 41px; height: 30px; float: left; display: block; margin:0; padding:4px; border:1px solid black; 
+      border-width: 1px 0 1px 1px;
+      text-align:center;
     }
   </style>
   
@@ -59,22 +61,17 @@
       
       
       function optimizeList() {
-        console.log($('#day-list').css('margin-left'));
         var num = parseInt($('#day-list').css('margin-left')) / 50;
-        console.log(num);
         if ((-num) > 10) {
           var toRemove = (-num) - 10;
-          console.log(toRemove);
           jQuery.each($('#day-list').children().slice(0,toRemove), function(i,v) {$(v).remove()});
           $('#day-list').css('margin-left', '-500px');
-          console.log($('#day-list').css('margin-left'));
-          //console.log($('#day-list').children().slice(0,toRemove));
         }
       }
       
       function move(dir) {
         var newMargin = (parseInt($("#day-list").css("margin-left")) - (50 * dir)) + "px";
-        $("#day-list").animate({ marginLeft: newMargin}, 500, "swing", function(e) {
+        $("#day-list").animate({ marginLeft: newMargin}, 200, "swing", function(e) {
           optimizeList();
         } );
         
@@ -98,7 +95,13 @@
   </script>
 
   <body>
-    <h1>plusquamperfecttest</h1>
+
+    <div id="day-list-wrapper"></div>
+    
+    <a href="#" id="click-prev">zurück</a>
+    <a href="#" id="click-play">play/pause</a>
+    <a href="#" id="click-next">vor</a>
+
     <div class="date" id="date-2008-12-31">
       <h2>Last day of year!</h2>
     </div>
@@ -109,11 +112,6 @@
       <h2>First day of year!</h2>
     </div>
     
-    <div id="day-list-wrapper"></div>
-    
-    <a href="#" id="click-prev">zurück</a>
-    <a href="#" id="click-play">play/pause</a>
-    <a href="#" id="click-next">vor</a>
     
   </body>
 
