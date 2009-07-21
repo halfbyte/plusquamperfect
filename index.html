@@ -2,11 +2,13 @@
   <head>
     <title>Plusquamperfect</title>
     <meta http-equiv="content-type" value="text/html;charset=utf-8">
-  </head>
   
   <style type="text/css">
     body {
+      background-color: #000;
+      color: #fff;
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      margin:0; padding:0;
     }
     #day-list-wrapper {
       overflow: hidden;
@@ -21,17 +23,18 @@
       float:left;
       display:block;
       overflow: visible;
+      background: transparent url(scala.png) top left repeat-x;
     }
     #day-list li {
       width: 20px; height: 20px; float: left; display: block; margin:0; padding:5px; 
-      text-align:left;
+      text-align:right;
       overflow: visible;
       margin-bottom:40px;
-      font-size: 1.4em;
-      font-weight: bold;
+      font-size: 1.2em;
+/*      font-weight: bold;*/
     }
     
-    #day-list li span { font-size: 2em; display: block; width: 300px; margin-top: -0.5em; color: #555;}
+    #day-list li span { font-size: 2em; display: block; width: 300px; margin-top: -0.5em; color: #555; font-weight: bold;}
     
   </style>
   
@@ -40,6 +43,8 @@
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     var dates = []
     var playing =false;
+    var elementsVisible;
+    var currentLastItem;
     $(document).ready(function(event) {
       $(".date").each( function(i) {
         var dateMatch = this.id.match(/date-(\d{4})-(\d{2})-(\d{2})/);
@@ -47,13 +52,19 @@
         $(this).hide();
         dates[dates.length] = {date: date, id: this.id};
       });
+      
+      elementsVisible = $('#day-list-wrapper').width() / 30;
+      console.log(elementsVisible)
+      
       dates = dates.sort(function(a,b) { return a.date - b.date });
       var firstDate = dates[0].date;
       var lastDate = dates[dates.length-1].date;
       var fullTimeInDays = Math.floor((lastDate - firstDate) / 3600000 / 24);
       console.log(fullTimeInDays);
-      $("#day-list-wrapper").append("<ul id='day-list'></ul>");
-      for(i=0;i<fullTimeInDays;i++) {
+      
+      currentLastItem = Math.min(fullTimeInDays, (elementsVisible * 2))
+      
+      for(i=0;i<Math.min(fullTimeInDays, (elementsVisible * 2));i++) {
         var thisDay = new Date(dates[0].date - (-3600000 * 24 * i))
         $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? "<span class='month'>" + months[thisDay.getMonth()] + " " + thisDay.getFullYear() + "</span>" : "")+ "</li>");
       }
@@ -79,6 +90,20 @@
           jQuery.each($('#day-list').children().slice(0,toRemove), function(i,v) {$(v).remove()});
           $('#day-list').css('margin-left', '-300px');
         }
+        
+        if( $('#day-list li').length < (elementsVisible * 2)) {
+          console.log(currentLastItem)
+          console.log(Math.min(currentLastItem + 10, fullTimeInDays))
+          var toAdd = Math.min(currentLastItem + 10, fullTimeInDays) - currentLastItem;
+          console.log(toAdd)
+          for(i=0;i<toAdd;i++) {
+            var thisDay = new Date(dates[0].date - (-3600000 * 24 * (i + currentLastItem)))
+            $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? "<span class='month'>" + months[thisDay.getMonth()] + " " + thisDay.getFullYear() + "</span>" : "")+ "</li>");
+            
+          }
+          currentLastItem = currentLastItem + toAdd;
+        }
+        
       }
       
       function move(dir) {
@@ -89,26 +114,25 @@
         } );
         
       }
-      
-      
-      
+
       function updateAnim() {
         if(playing) {
           move(1);
         } else window.setTimeout(updateAnim, 1000);
       }     
       window.setTimeout(updateAnim, 1000);
-      
-      
     });
     
     
     
   </script>
+</head>
 
   <body>
 
-    <div id="day-list-wrapper"></div>
+    <div id="day-list-wrapper">
+      <ul id='day-list'></ul>
+    </div>
     
     <a href="#" id="click-prev">zurück</a>
     <a href="#" id="click-play">play/pause</a>
