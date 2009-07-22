@@ -2,177 +2,10 @@
   <head>
     <title>Plusquamperfect</title>
     <meta http-equiv="content-type" value="text/html;charset=utf-8">
-  
-  <style type="text/css">
-  
-    .date {
-      margin:auto 50px;
-      padding: 10px;
-    }
-    
-    .date h2 { margin:auto 0; padding:0; height: 1em; color: #ff0;}
-    .date img { float:right; }
-  
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      margin:0; padding:0;
-    }
-    #day-list-wrapper {
-      overflow: hidden;
-      height: 70px;
-      
-    }
-    #day-list { 
-      list-style-type: none;
-      height: 30px;
-      margin:0;
-      padding:0;
-      float:left;
-      display:block;
-      overflow: visible;
-      background: transparent url(scala.png) top left repeat-x;
-    }
-    #day-list li {
-      width: 20px; height: 20px; float: left; display: block; margin:0; padding:5px; 
-      text-align:right;
-      overflow: visible;
-      margin-bottom:40px;
-      font-size: 1.2em;
-/*      font-weight: bold;*/
-    }
-    
-    #day-list li span { font-size: 2em; display: block; width: 300px; margin-top: -0.5em; color: #555; font-weight: bold;}
-    
-    #controls {
-      position:absolute;
-      bottom: 5px;
-      left: 5px;
-      z-index: 10;
-      height: 30px;
-    }
-    
-  </style>
+  <link rel="stylesheet" href="slideshow.css" media="screen,projection">  
   
   <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
-  <script type="text/javascript">
-    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    var dates = []
-    var playing =false;
-    var elementsVisible;
-    var currentLastItem;
-    var currentPosition = 0;
-    var firstDate;
-    $(document).ready(function(event) {
-      $(".date").each( function(i) {
-        var dateMatch = this.id.match(/date-(\d{4})-(\d{2})-(\d{2})/);
-        var date = new Date(dateMatch[1],dateMatch[2]-1,dateMatch[3]);
-        $(this).hide();
-        dates[dates.length] = {date: date, id: this.id};
-      });
-      
-      elementsVisible = $('#day-list-wrapper').width() / 30;
-      
-      dates = dates.sort(function(a,b) { return a.date - b.date });
-      firstDate = new Date(dates[0].date.getTime()  - (3600000 * 24 * Math.floor((elementsVisible / 2) + 2)));
-      var lastDate = dates[dates.length-1].date;
-      var fullTimeInDays = Math.floor((lastDate - firstDate) / 3600000 / 24);
-      
-      currentLastItem = Math.min(fullTimeInDays, (elementsVisible * 2))
-      
-      for(i=0;i<Math.min(fullTimeInDays, (elementsVisible * 2));i++) {
-        var thisDay = new Date(firstDate - (-3600000 * 24 * i))
-        $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? "<span class='month'>" + months[thisDay.getMonth()] + " " + thisDay.getFullYear() + "</span>" : "")+ "</li>");
-      }
-      $("#click-prev").click(function(event) {
-        move(-1);
-        return false;
-      });
-      $("#click-next").click(function(event) {
-        move(1);
-        return false;
-      });
-      
-      $("#click-play").click(function(event) {
-        playing = !playing;
-        if (playing) {
-          $(".date").hide("slow");
-        }
-        return false;
-      });
-      
-      $(document).keypress(function(e) {
-        if (e.which == 32) {
-          playing = !playing;
-          if (playing) {
-            $(".date").hide("slow");
-          }
-          return false;        
-        }
-      });
-      
-      
-      function optimizeList() {
-        var num = parseInt($('#day-list').css('margin-left')) / 30;
-        if ((-num) > 10) {
-          var toRemove = (-num) - 10;
-          jQuery.each($('#day-list').children().slice(0,toRemove), function(i,v) {$(v).remove()});
-          $('#day-list').css('margin-left', '-300px');
-        }
-        
-        if( $('#day-list li').length < (elementsVisible * 2)) {
-          var toAdd = Math.min(currentLastItem + 10, fullTimeInDays) - currentLastItem;
-          for(i=0;i<toAdd;i++) {
-            var thisDay = new Date(firstDate - (-3600000 * 24 * (i + currentLastItem)))
-            $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? "<span class='month'>" + months[thisDay.getMonth()] + " " + thisDay.getFullYear() + "</span>" : "")+ "</li>");
-            
-          }
-          currentLastItem = currentLastItem + toAdd;
-        }
-        
-      }
-
-      function checkForSlides() {
-            var thisDay = new Date(firstDate - (-3600000 * 24 * Math.floor(currentPosition + Math.floor(elementsVisible/2))));
-            var dateArray = jQuery.map(dates, function(e,i) { return(e.date.getTime()) });
-            
-            var posInArray = dateArray.indexOf(thisDay.getTime());
-            if (posInArray != -1) {
-              $("#" + dates[posInArray].id).show("slow");
-              if ($("#" + dates[posInArray].id).hasClass("hold")) {
-                playing = false;
-              } else {
-                window.setTimeout(function() {
-                  $(".date").hide("slow");  
-                }, 3000);
-              }
-            }
-      }
-      
-      function move(dir) {
-        currentPosition += (dir / Math.abs(dir));
-        var newMargin = (parseInt($("#day-list").css("margin-left")) - (30 * dir)) + "px";
-        $("#day-list").animate({ marginLeft: newMargin}, 600, "swing", function(e) {
-          optimizeList();
-           window.setTimeout(updateAnim, 400);
-        } );
-        checkForSlides();
-        
-      }
-
-
-      function updateAnim() {
-        if(playing) {
-          move(1);
-        } else window.setTimeout(updateAnim, 1000);
-      }     
-      window.setTimeout(updateAnim, 1000);
-    });
-    
-    
-    
-  </script>
+  <script type="text/javascript" src="plusquamperfect.js"></script>
 </head>
 
   <body>
@@ -193,14 +26,23 @@
     <div class="date" id="date-2009-01-01">
       <h2>First day of year!</h2>
     </div>
-    <div class="date" id="date-2004-06-17">
+    <div class="date hold" id="date-2004-06-17">
       <h2>First day of year!</h2>
+    </div>
+    <div class="date" id="date-2004-06-21">
+      <img src="jan.jpg">
     </div>
     <div class="date hold" id="date-2004-07-17">
       <h2>That day</h2>
       <p><img src="jan.jpg"></p>
     </div>
     
+    <div class="title">
+      <h1>5 Jahre Rails</h1>
+      <h2>Ein persönlicher Rückblick</h2>
+      <p>2. September 2009 / Jan Krutisch</p>
+      <img src="jan.jpg">
+    </div>
     
   </body>
 

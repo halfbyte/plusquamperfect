@@ -1,0 +1,57 @@
+    h1,h2,h3 { margin:0; padding:0; line-height:1.5em;}  
+    h1 { font-size: 3em;}
+    h2 { font-size: 2em;}
+    h3 { font-size: 1.5em;}
+      
+    .date, .title {
+      margin:auto 10%;
+      padding: 0;
+      /* border: 1px solid red; */
+      height: 60%;
+    }
+
+    .date img, .title img {}
+  
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      margin:0; padding:0;
+      font-size: 150%;
+    }
+    #day-list-wrapper {
+      overflow: hidden;
+      height: 90px;
+      
+    }
+    #day-list { 
+      list-style-type: none;
+      height: 40px;
+      margin:0;
+      padding:0;
+      float:left;
+      display:block;
+      overflow: visible;
+      background: transparent url(scala.png) top left repeat-x;
+
+    }
+    #day-list li {
+      width: 30px; height: 20px; float: left; display: block; margin:0; padding:5px; 
+      text-align:right;
+      overflow: visible;
+      margin-bottom:60px;
+      font-size: 1.2em;
+
+/*      font-weight: bold;*/
+    }
+    
+    #day-list li span { font-size: 2em; display: block; width: 15em; margin-top: -0.5em; color: #555; font-weight: bold; text-align:left; padding-left:10px;}
+    
+    #controls {
+      position:absolute;
+      bottom: 5px;
+      left: 5px;
+      z-index: 10;
+      height: 30px;
+    }
+
