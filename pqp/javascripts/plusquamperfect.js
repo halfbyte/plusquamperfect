@@ -20,7 +20,8 @@
       elementsVisible = $('#day-list-wrapper').width() / dayWidth;
       
       dates = dates.sort(function(a,b) { return a.date - b.date });
-      firstDate = new Date(dates[0].date.getTime()  - (3600000 * 24 * Math.floor((elementsVisible / 2) + 2)));
+      firstDate = new Date(dates[0].date.getFullYear(), dates[0].date.getMonth(), dates[0].date.getDate() - (elementsVisible / 2) - 2); // Time()  - (3600000 * 24 * Math.floor((elementsVisible / 2) + 2)));
+      console.log(firstDate)
       var lastDate = dates[dates.length-1].date;
       var fullTimeInDays = Math.floor((lastDate - firstDate) / 3600000 / 24);
       
@@ -28,7 +29,7 @@
       
       
       for(i=0;i<Math.min(fullTimeInDays, (elementsVisible * 2));i++) {
-        var thisDay = new Date(firstDate - (-3600000 * 24 * i));
+        var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + i);
         $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? "<span class='month'>" + months[thisDay.getMonth()] + " " + thisDay.getFullYear() + "</span>" : "")+ "</li>");
       }
       
@@ -78,7 +79,7 @@
         if( $('#day-list li').length < (elementsVisible * 2)) {
           var toAdd = Math.min(currentLastItem + 10, fullTimeInDays) - currentLastItem;
           for(i=0;i<toAdd;i++) {
-            var thisDay = new Date(firstDate - (-3600000 * 24 * (i + currentLastItem)))
+            var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + (i + currentLastItem));
             $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? "<span class='month'>" + months[thisDay.getMonth()] + " " + thisDay.getFullYear() + "</span>" : "")+ "</li>");
             
           }
@@ -88,9 +89,9 @@
       }
 
       function checkForSlides() {
-            var thisDay = new Date(firstDate - (-3600000 * 24 * Math.floor(currentPosition + Math.floor(elementsVisible/2))));
+            var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + Math.floor(currentPosition + Math.floor(elementsVisible/2)));
+            console.log(thisDay)
             var dateArray = jQuery.map(dates, function(e,i) { return(e.date.getTime()) });
-            
             var posInArray = dateArray.indexOf(thisDay.getTime());
             if (posInArray != -1) {
               $("#" + dates[posInArray].id).fadeIn("slow");

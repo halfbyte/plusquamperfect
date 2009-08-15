@@ -33,7 +33,7 @@
       float:left;
       display:block;
       overflow: visible;
-      background: transparent url(scala.png) top left repeat-x;
+      background: transparent url(../images/scala.png) top left repeat-x;
 
     }
     #day-list li {
@@ -56,3 +56,4 @@
       height: 30px;
     }
 
+    .footnotes { display:none;}
