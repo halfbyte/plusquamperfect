@@ -27,6 +27,7 @@
     #day-list { 
       list-style-type: none;
       height: 40px;
+      width: 3000px;
       margin:0;
       padding:0;
       float:left;

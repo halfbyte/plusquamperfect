@@ -6,7 +6,10 @@
     var currentPosition = 0;
     var firstDate;
     var dayWidth = 40;
+    var daysHidden = true;
     $(document).ready(function(event) {
+      $("body").prepend('<div id="day-list-wrapper"><ul id="day-list"></ul></div>');
+
       $(".date").each( function(i) {
         var dateMatch = this.id.match(/date-(\d{4})-(\d{2})-(\d{2})/);
         var date = new Date(dateMatch[1],dateMatch[2]-1,dateMatch[3]);
@@ -23,10 +26,14 @@
       
       currentLastItem = Math.min(fullTimeInDays, (elementsVisible * 2))
       
+      
       for(i=0;i<Math.min(fullTimeInDays, (elementsVisible * 2));i++) {
-        var thisDay = new Date(firstDate - (-3600000 * 24 * i))
+        var thisDay = new Date(firstDate - (-3600000 * 24 * i));
         $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? "<span class='month'>" + months[thisDay.getMonth()] + " " + thisDay.getFullYear() + "</span>" : "")+ "</li>");
       }
+      
+      $("#day-list").hide();
+      
       $("#click-prev").click(function(event) {
         move(-1);
         return false;
@@ -48,6 +55,10 @@
         if (e.which == 32) {
           playing = !playing;
           if (playing) {
+            if (daysHidden) {
+              daysHidden = false;
+              $("#day-list").fadeIn("slow");
+            }
             $(".date").fadeOut("slow");
             $(".title").fadeOut("slow");
           }
