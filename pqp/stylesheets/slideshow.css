@@ -2,15 +2,45 @@
     h1 { font-size: 3em;}
     h2 { font-size: 2em;}
     h3 { font-size: 1.5em;}
-      
+    
+    img { margin-top: 0.7em;}
+    
     .date, .title {
-      margin:auto 10%;
+      position: absolute;
+      top: 15%; left: 10%;
       padding: 0;
-      /* border: 1px solid red; */
       height: 60%;
+      width: 80%;
+    }
+    
+    .date.image, .date .image {
+      text-align:center;
+    }
+    
+    .date h2.single {
+      font-size: 4em;
+      text-align:center;
+    }
+    
+    .version {
+      height: 33%;
+      right: 10%;
+      font-size: 0.75em;
+      text-align:right;
+      color: #ffc;
+      opacity: 0.8;
+      padding: 20px;
     }
 
-    .date img, .title img {}
+    .date img, .title img { float:right; vertical-align:top; margin-left: 2em; margin-bottom:2em;}
+    .date.image img, .date .image img { float:none; vertical-align:top; margin-left: 2em; margin-bottom:2em;}
+  
+    blockquote { 
+      font-style:italic; 
+      background:transparent url(../images/quotes.png) top left no-repeat;
+      margin:0; padding-left: 40px; padding-top: 10px;
+    
+    }
   
     body {
       background-color: #000;
@@ -57,3 +87,10 @@
     }
 
     .footnotes { display:none;}
+    #toolbar {
+      position:absolute;
+      z-index:2;
+      bottom:0;
+      background:#ccc;
+      width:100%;
+    }

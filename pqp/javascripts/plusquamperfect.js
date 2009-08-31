@@ -7,15 +7,18 @@
     var firstDate;
     var dayWidth = 40;
     var daysHidden = true;
+    var currentSlideGroup = null;
+    var currentGroupSlide = 0;
+
+
     $(document).ready(function(event) {
       $("body").prepend('<div id="day-list-wrapper"><ul id="day-list"></ul></div>');
-
       $(".date").each( function(i) {
-        var dateMatch = this.id.match(/date-(\d{4})-(\d{2})-(\d{2})/);
-        var date = new Date(dateMatch[1],dateMatch[2]-1,dateMatch[3]);
+        var date = dateFromId(this.id);
         $(this).hide();
         dates[dates.length] = {date: date, id: this.id};
       });
+
       
       elementsVisible = $('#day-list-wrapper').width() / dayWidth;
       
@@ -26,47 +29,56 @@
       var fullTimeInDays = Math.floor((lastDate - firstDate) / 3600000 / 24);
       
       currentLastItem = Math.min(fullTimeInDays, (elementsVisible * 2))
+      rebuildTimeline(dates[0].date);
+
+      prepareSlideGroups();
       
-      
-      for(i=0;i<Math.min(fullTimeInDays, (elementsVisible * 2));i++) {
-        var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + i);
-        $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? "<span class='month'>" + months[thisDay.getMonth()] + " " + thisDay.getFullYear() + "</span>" : "")+ "</li>");
-      }
+      createToolbar();
+
       
       $("#day-list").hide();
       
-      $("#click-prev").click(function(event) {
-        move(-1);
-        return false;
-      });
-      $("#click-next").click(function(event) {
-        move(1);
-        return false;
-      });
-      
-      $("#click-play").click(function(event) {
+      function playPause() {
         playing = !playing;
         if (playing) {
-          $(".date").fadeOut("slow");
-        }
-        return false;
-      });
-      
-      $(document).keypress(function(e) {
-        if (e.which == 32) {
-          playing = !playing;
-          if (playing) {
-            if (daysHidden) {
-              daysHidden = false;
-              $("#day-list").fadeIn("slow");
-            }
-            $(".date").fadeOut("slow");
-            $(".title").fadeOut("slow");
+          if (daysHidden) {
+            daysHidden = false;
+            $("#day-list").fadeIn("slow");
           }
-          return false;        
-        }
-      });
+          $(".date").fadeOut("slow");
+          $(".title").fadeOut("slow");
+        }        
+      }
       
+      function dateFromId(dateString) {
+        var dateMatch = dateString.match(/date-(\d{4})-(\d{2})-(\d{2})/);
+        if (dateMatch) return new Date(dateMatch[1],dateMatch[2]-1,dateMatch[3]);
+        return null;
+      }
+      
+      function gotoDateString(dateString) {
+        var newCurrentDate = dateFromId(dateString);
+        currentPosition = Math.floor((newCurrentDate - firstDate) / 86400000) - Math.floor(elementsVisible / 2);
+        $('#day-list').css('margin-left', "0")
+        rebuildTimeline(newCurrentDate);
+        checkForSlides();
+      }
+            
+      function rebuildTimeline(date) {
+        $("#day-list").empty();
+        var thisFirstDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - (elementsVisible / 2) - 1);
+        currentLastItem = Math.min(fullTimeInDays, (elementsVisible * 2))
+        for( i=0 ; i<Math.min(fullTimeInDays, (elementsVisible * 2)) ; i++ ) {
+          var thisDay = new Date(thisFirstDate.getFullYear(), thisFirstDate.getMonth(), thisFirstDate.getDate() + i);
+          $("#day-list").append("<li>" + thisDay.getDate() + (thisDay.getDate() == 1 ? "<span class='month'>" + months[thisDay.getMonth()] + " " + thisDay.getFullYear() + "</span>" : "")+ "</li>");
+        }
+        
+      }
+      
+      function prepareSlideGroups() {
+        $(".date.slidegroup").children(".slide").hide();
+        $(".date.slidegroup").children(".slide:first").show();
+      }
       
       function optimizeList() {
         var num = parseInt($('#day-list').css('margin-left')) / dayWidth;
@@ -87,22 +99,98 @@
         }
         
       }
+      
+      function isoDateFormat(date) {
+        return "" + date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+      }
+      
+      function toggleToolbar() {
+        $('#toolbar').toggle();
+      }
+      
+      function createToolbar() {
+        $("body").append('<div id="toolbar"><select id="date-selector"></select> <a href="#" id="click-play">pp</a> <span id="debug-output"></span></div>');
+        var sel = $('#date-selector')[0]
+        jQuery.each(dates, function(i,v) {
+          sel.options[sel.options.length] = new Option(isoDateFormat(v.date), v.id);
+        })
+        
+        $("#date-selector").change(function(event) {
+          gotoDateString(event.target.options[event.target.options.selectedIndex].value);
+          return false;
+        })
+        
+        $("#click-play").click(function(event) {
+          playPause();
+          return false;
+        });
+
+        $(document).keypress(function(e) {
+          if (e.which == 32) {
+            playPause();
+            return false;
+          } else if(e.which == 104) {
+            toggleToolbar(); 
+          } else if(e.which == 106) {
+            prevGroupSlide(); 
+          } else if(e.which == 107) {
+            nextGroupSlide(); 
+          } else {
+            console.log(e.which)
+          }
+        });
+        
+      }
+      
+      function nextGroupSlide() {
+        if(currentSlideGroup) {
+          if (currentSlideGroup.children(":eq(" + (currentGroupSlide + 1) +")").size() == 0) {
+            currentSlideGroup.fadeOut('slow');
+            currentSlideGroup = null;
+            currentGroupSlide = 0;
+          } else {
+            currentSlideGroup.children(":eq(" + (currentGroupSlide + 1) +")").show();
+            currentSlideGroup.children(":eq(" + (currentGroupSlide) +")").hide();            
+            currentGroupSlide++;
+          }
+        }
+      }
+
+      function prevGroupSlide() {
+        if(currentSlideGroup) {
+          if (currentSlideGroup.children(":eq(" + (currentGroupSlide - 1) +")").size() == 0) {
+            currentGroupSlide = 0;
+          } else {
+            currentSlideGroup.children(":eq(" + (currentGroupSlide - 1) +")").show();
+            currentSlideGroup.children(":eq(" + (currentGroupSlide) +")").hide();            
+            currentGroupSlide--;
+          }
+        }
+        
+      }
 
       function checkForSlides() {
-            var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + Math.floor(currentPosition + Math.floor(elementsVisible/2)));
-            console.log(thisDay)
-            var dateArray = jQuery.map(dates, function(e,i) { return(e.date.getTime()) });
-            var posInArray = dateArray.indexOf(thisDay.getTime());
-            if (posInArray != -1) {
-              $("#" + dates[posInArray].id).fadeIn("slow");
-              if ($("#" + dates[posInArray].id).hasClass("hold")) {
-                playing = false;
-              } else {
-                window.setTimeout(function() {
-                  $(".date").fadeOut("slow");  
-                }, 3000);
-              }
-            }
+        var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + Math.floor(currentPosition + Math.floor(elementsVisible/2)));
+        $('#debug-output').html("" + thisDay)
+        var dateArray = jQuery.map(dates, function(e,i) { return(e.date.getTime()) });
+        var posInArray = dateArray.indexOf(thisDay.getTime());
+        
+        
+        if (posInArray != -1) {
+          if (!$("#" + dates[posInArray].id).hasClass("version")) $(".date").fadeOut("fast");
+
+          $("#" + dates[posInArray].id).fadeIn("slow");
+          if ($("#" + dates[posInArray].id).hasClass("hold")) {
+            playing = false;
+          } if ($("#" + dates[posInArray].id).hasClass("slidegroup")) {
+            // do nothing for now.
+            currentSlideGroup = $("#" + dates[posInArray].id)
+          } else {
+            window.setTimeout(function() {
+              $("#" + dates[posInArray].id).fadeOut("slow");  
+            }, 3000);
+          }
+        }
       }
       
       function move(dir) {

@@ -1,0 +1,34 @@
+mailinglist:
+  date: 2005-09-17
+  title: rubyonrails-ug.de im Betrieb
+  url: http://mailman.headflash.com/private/rubyonrails-ug/2005-September/000000.html
+
+mongrel_1_0:
+  date: 2007-01-23
+  title: Mongrel 1.0.1 released
+  url: http://rubyforge.org/pipermail/mongrel-users/2007-January/002771.html
+
+passenger:
+  date: 2008-04-11
+  title: Mod Passenger launched
+  url: http://weblog.rubyonrails.org/2008/4/11/passenger-mod_rails-for-apache-launches
+
+merb_ann:
+  date: ???
+  title: Mongrel + erb = Merb
+  url: ???
+
+first_railskonferenz:
+  title: Erste Rails-Konferenz
+  date: 2006-11-03
+  url: http://www.rails-konferenz.de/2006/
+
+second_railskonferenz:
+  title: Zweite Rails-Konferenz
+  date: 2007-06-22
+  url: http://www.rails-konferenz.de/2007/
+
+third_railskonferenz:
+  title: Dritte Rails-Konferenz
+  date: 2008-06-10
+    url: http://www.rails-konferenz.de/2008/
