@@ -9,6 +9,7 @@
     var daysHidden = true;
     var currentSlideGroup = null;
     var currentGroupSlide = 0;
+    var presenterWindow = null;
 
 
     $(document).ready(function(event) {
@@ -109,7 +110,7 @@
       }
       
       function createToolbar() {
-        $("body").append('<div id="toolbar"><select id="date-selector"></select> <a href="#" id="click-play">pp</a> <span id="debug-output"></span></div>');
+        $("body").append('<div id="toolbar"><select id="date-selector"></select> <a href="#" id="click-play">pp</a> <a href="#" id="click-presenter">open presenter display</a> <span id="debug-output"></span></div>');
         var sel = $('#date-selector')[0]
         jQuery.each(dates, function(i,v) {
           sel.options[sel.options.length] = new Option(isoDateFormat(v.date), v.id);
@@ -122,6 +123,11 @@
         
         $("#click-play").click(function(event) {
           playPause();
+          return false;
+        });
+
+        $("#click-presenter").click(function(event) {
+          openPresenterWindow();
           return false;
         });
 
@@ -140,6 +146,14 @@
           }
         });
         
+      }
+      
+      function updatePresenterWindow() {
+        if (!presenterWindow) return;
+        var root = $(presenterWindow.document);
+        var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + Math.floor(currentPosition + Math.floor(elementsVisible/2)));
+        console.log($("#date-display", root));
+        $("#date-display", root).html("" + thisDay);
       }
       
       function nextGroupSlide() {
@@ -168,10 +182,14 @@
         }
         
       }
+      
+      function openPresenterWindow() {
+        presenterWindow = window.open("presenter.html", "Presenter Display", "width=600,height=400,toolbar=no,menubar=no,location=no");
+      }
 
       function checkForSlides() {
         var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + Math.floor(currentPosition + Math.floor(elementsVisible/2)));
-        $('#debug-output').html("" + thisDay)
+        // $('#debug-output').html("" + thisDay)
         var dateArray = jQuery.map(dates, function(e,i) { return(e.date.getTime()) });
         var posInArray = dateArray.indexOf(thisDay.getTime());
         
@@ -209,6 +227,7 @@
         if(playing) {
           move(1);
         } else window.setTimeout(updateAnim, 1000);
+        updatePresenterWindow();
       }     
       window.setTimeout(updateAnim, 1000);
     });
