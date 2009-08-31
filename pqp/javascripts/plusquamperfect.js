@@ -148,13 +148,6 @@
         
       }
       
-      function updatePresenterWindow() {
-        if (!presenterWindow) return;
-        var root = $(presenterWindow.document);
-        var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + Math.floor(currentPosition + Math.floor(elementsVisible/2)));
-        console.log($("#date-display", root));
-        $("#date-display", root).html("" + thisDay);
-      }
       
       function nextGroupSlide() {
         if(currentSlideGroup) {
@@ -167,6 +160,7 @@
             currentSlideGroup.children(":eq(" + (currentGroupSlide) +")").hide();            
             currentGroupSlide++;
           }
+          updatePresenterPreviewGroupSlide();
         }
       }
 
@@ -179,13 +173,38 @@
             currentSlideGroup.children(":eq(" + (currentGroupSlide) +")").hide();            
             currentGroupSlide--;
           }
+          updatePresenterPreviewGroupSlide();
         }
         
       }
       
       function openPresenterWindow() {
-        presenterWindow = window.open("presenter.html", "Presenter Display", "width=600,height=400,toolbar=no,menubar=no,location=no");
+        presenterWindow = window.open("presenter.html", "Presenter Display", "width=800,height=600,toolbar=no,menubar=no,location=no");
       }
+
+      function updatePresenterWindow() {
+        if (!presenterWindow) return;
+        var root = $(presenterWindow.document);
+        var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + Math.floor(currentPosition + Math.floor(elementsVisible/2)));
+        console.log($("#date-display", root));
+        $("#date-display", root).html("" + isoDateFormat(thisDay));
+      }
+      
+      function updatePresenterPreview(content) {
+        if (!presenterWindow) return;
+        var root = $(presenterWindow.document);
+        $('#preview', root).html(content);
+        $('#preview div', root).show();
+      }
+      
+      function updatePresenterPreviewGroupSlide() {
+        if (!presenterWindow) return;
+        var root = $(presenterWindow.document);
+        $('#preview .slide', root).removeClass("current");
+        $('#preview .slide:eq(' + currentGroupSlide + ')' , root).addClass("current");
+        
+      }
+
 
       function checkForSlides() {
         var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + Math.floor(currentPosition + Math.floor(elementsVisible/2)));
@@ -198,11 +217,14 @@
           if (!$("#" + dates[posInArray].id).hasClass("version")) $(".date").fadeOut("fast");
 
           $("#" + dates[posInArray].id).fadeIn("slow");
+          console.log($("#" + dates[posInArray].id).html());
+          updatePresenterPreview($("#" + dates[posInArray].id).html());
           if ($("#" + dates[posInArray].id).hasClass("hold")) {
             playing = false;
           } if ($("#" + dates[posInArray].id).hasClass("slidegroup")) {
             // do nothing for now.
-            currentSlideGroup = $("#" + dates[posInArray].id)
+            currentSlideGroup = $("#" + dates[posInArray].id);
+            updatePresenterPreviewGroupSlide();
           } else {
             window.setTimeout(function() {
               $("#" + dates[posInArray].id).fadeOut("slow");  
