@@ -25,7 +25,6 @@
       
       dates = dates.sort(function(a,b) { return a.date - b.date });
       firstDate = new Date(dates[0].date.getFullYear(), dates[0].date.getMonth(), dates[0].date.getDate() - (elementsVisible / 2) - 2); // Time()  - (3600000 * 24 * Math.floor((elementsVisible / 2) + 2)));
-      console.log(firstDate)
       var lastDate = dates[dates.length-1].date;
       var fullTimeInDays = Math.floor((lastDate - firstDate) / 3600000 / 24);
       
@@ -186,7 +185,6 @@
         if (!presenterWindow) return;
         var root = $(presenterWindow.document);
         var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + Math.floor(currentPosition + Math.floor(elementsVisible/2)));
-        console.log($("#date-display", root));
         $("#date-display", root).html("" + isoDateFormat(thisDay));
       }
       
@@ -208,7 +206,7 @@
 
       function checkForSlides() {
         var thisDay = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate() + Math.floor(currentPosition + Math.floor(elementsVisible/2)));
-        // $('#debug-output').html("" + thisDay)
+        $('#debug-output').html("" + thisDay)
         var dateArray = jQuery.map(dates, function(e,i) { return(e.date.getTime()) });
         var posInArray = dateArray.indexOf(thisDay.getTime());
         
@@ -217,13 +215,13 @@
           if (!$("#" + dates[posInArray].id).hasClass("version")) $(".date").fadeOut("fast");
 
           $("#" + dates[posInArray].id).fadeIn("slow");
-          console.log($("#" + dates[posInArray].id).html());
           updatePresenterPreview($("#" + dates[posInArray].id).html());
           if ($("#" + dates[posInArray].id).hasClass("hold")) {
             playing = false;
           } if ($("#" + dates[posInArray].id).hasClass("slidegroup")) {
             // do nothing for now.
             currentSlideGroup = $("#" + dates[posInArray].id);
+            currentGroupSlide = 0;
             updatePresenterPreviewGroupSlide();
           } else {
             window.setTimeout(function() {
