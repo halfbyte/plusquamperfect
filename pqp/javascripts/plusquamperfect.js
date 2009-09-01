@@ -76,8 +76,8 @@
       }
       
       function prepareSlideGroups() {
-        $(".date.slidegroup").children(".slide").hide();
-        $(".date.slidegroup").children(".slide:first").show();
+        $(".date.slidegroup .slide").hide();
+        $(".date.slidegroup .slide:first").show();
       }
       
       function optimizeList() {
@@ -221,6 +221,7 @@
           } if ($("#" + dates[posInArray].id).hasClass("slidegroup")) {
             // do nothing for now.
             currentSlideGroup = $("#" + dates[posInArray].id);
+            $("#" + dates[posInArray].id + " .slide:first").show();
             currentGroupSlide = 0;
             updatePresenterPreviewGroupSlide();
           } else {
