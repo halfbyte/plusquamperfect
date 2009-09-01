@@ -1,7 +1,7 @@
 .date#date-2004-01-10
   %h2.single ActiveRecord > RubyTalk
   
-.date.slidegroup#date-2004-02-01
+.date.slidegroup#date-2004-01-16
   .slide
     %h2.single Backstory
   .slide
@@ -12,19 +12,23 @@
     %h2.single JSP
   .slide
     %pre.prettyprint
-      :escaped
-        <h2><%= co.getContent("/content/mHeadline") %></h2>
-        <p><%= co.getContent("/content/mTeaser") %></p>
+      :preserve
+        &lt;h2&gt;&lt;%= co.getContent("/content/mHeadline") %&gt;&lt;/h2&gt;
+        &lt;p&gt;&lt;%= co.getContent("/content/mTeaser") %&gt;&lt;/p&gt;
   .slide
     %h2.single CSS-Layouts
   .slide
     %h2.single Barrierefreiheit
   .slide
     %h2.single AJAX Evangelism
-
-.date#date-2004-03-01
-  %h2.single jan.krutisch.de/blog/
-  %p (Zweites Blog-System)
+  .slide
+    %h2.single Lessons learned
+  .slide
+    %h2.single CSS-Mastery
+  .slide
+    %h2.single IE-Hass
+  .slide
+    %h2.single Dilbert hat recht...
 
 .date.slidegroup#date-2004-05-29
   .slide
@@ -39,8 +43,28 @@
 .date.version#date-2004-05-30
   %h2 ActiveRecord 0.75
 
+.date.image#date-2004-07-19
+  %img(src='assets/photos/2004-07-19.jpg')
+
+.date.image#date-2004-08-19
+  %img(src='assets/photos/2004-08-19.jpg')
+
+.date#date-2004-08-22
+  %h2.single Erstes Bild bei flickr
+
+.date#date-2004-09-06
+  %h2.single Erster Bookmark bei Flickr
+
+.date.image#date-2004-10-04
+  %img(src='assets/photos/2004-10-04.jpg')
+
+.date.version#date-2004-12-25
+  %h2 Ruby 1.8.2
 
 -################################################################## 2005
+
+.date#date-2005-02-08
+  %h2 Gmail-Account :)
 
 .date.slidegroup#date-2005-03-18
   .slide
@@ -58,6 +82,16 @@
   .slide
     %h2.single then you win
 
+.date#date-2005-06-02
+  %h2 Coreteam
+  %ul
+    %li DHH
+    %li Jamis Buck
+    %li Jeremy Kemper
+
+.date#date-2005-07-07
+  %h2 Nicholas Seckar > Coreteam
+
 .date.slidegroup#date-2005-07-13
   .slide
     %h2.single First Rails Book evar
@@ -74,10 +108,29 @@
     %li Daniel Bovensiepen
     %li Michael Bumann
 
+.date.version#date-2005-09-21
+  %h2 Ruby 1.8.3
+
+.date#date-2005-09-24
+  %h2 New Coreteam members
+  %ul
+    %li Florian Weber
+    %li Leon Breedt
+    %li Michael Koziarski
+    %li Sam Stephenson
+    %li Thomas Fuchs
+    %li Tobias Luetke
+
 .date.slidegroup#date-2005-10-16
   .slide
     %h2.single RubyConf 2005
       
+.date#date-2005-10-17
+  %h2 Deployment: SCGI
+  %p Zed A. Shaw
+  %p SGGI Rails Runner (SRR)
+  %p mod_scgi in apache || lighttpd
+  %p (0.4.2)
 
 .date#date-2005-10-19
   %h2 Lehmanns-Vortrag
@@ -86,12 +139,8 @@
     %li Ralf Wirdemann
     %li Konstitierende Sitzung UG Hamburg
 
-  .date#date-2006-10-18
-    %h2 Deployment: SCGI
-    %p Zed A. Shaw
-    %p SGGI Rails Runner (SRR)
-    %p mod_scgi in apache || lighttpd
-    %p (0.4.2)
+.date.version#date-2005-12-24
+  %h2 Ruby 1.8.4
 
 -################################################################## 2006
 
@@ -104,15 +153,26 @@
 .date#date-2006-02-20
   %h2 Deployment: mongrel
 
-.date#date-2006-02-26
-  %h2 Deployment: SCGI
-  %p mod_scgi / lighttpd
-
-.date#date-2006-03-15
+.date#date-2006-03-01
   %h2 Twitter starts
 
-.date#date-2006-03-29
+.date#date-2006-03-05
+  %h2 Rick Olson > Coreteam
+
+.date#date-2006-03-13
+  %h2 Vortrag Ramon + me Cebit iX-Forum
+
+.date.slidegroup#date-2006-03-21
+  .slide
+    %h2 Pentax ist*DS
+
+.date.slidegroup#date-2006-03-29
+  .slide
+    %h2.single Rails 1.1 faves
   -# TODO: Fav. Feature of Rails 1.1
+
+.date#date-2006-05-14
+  %h2 JRuby runs Rails
 
 .date#date-2006-05-23
   %h2 What's new in Edge Rails
@@ -126,8 +186,14 @@
   .slide
     %h2.single Lawyers were involved
 
+.date.image#date-2006-07-26
+  %img(src='assets/photos/2006-07-26.jpg')
+
 .date#date-2006-08-24
   %h2.single Amazon EC2
+
+.date.version#date-2006-08-29
+  %h2 Ruby 1.8.5
 
 .date#date-2006-09-12
   %h2.single Ein Buch-Auftrag
@@ -141,8 +207,18 @@
 .date#date-2006-11-01
   %h2.single me@Qype
 
-.date#date-2006-11-03
-  %h2.single Erste Railskonferenz in Frankfurt
+.date#date-2006-11-02
+  %img(src='assets/photos/2006-11-02.jpg')
+
+.date.slidegroup#date-2006-11-03
+  .slide
+    %h2.single Erste Railskonferenz in Frankfurt
+  .slide.image
+    %img(src='assets/photos/2006-11-03.jpg')
+  .slide.image
+    %img(src='assets/photos/2006-11-03-01.jpg')
+
+
 
 -################################################################## 2007
 
@@ -155,6 +231,15 @@
 .date#date-2007-03-06
   %h2.single rm -rf public/user_images/
 
+.date.version#date-2007-03-12
+  %h2 Ruby 1.8.6
+
+.date#date-2007-03-16
+  %h2 Erster Tweet
+
+.date.image#date-2007-03-29
+  %img(src='assets/photos/2007-03-29.jpg')
+
 .date.slidegroup#date-2007-04-15
   %img{:src => 'assets/mindmatters-logo.gif'}
   %h2.single me@mindmatters
@@ -165,8 +250,14 @@
   .slide.image
     %img{:src => 'assets/webanwendungen.jpg'}
 
+.date.version#date-2007-06-10
+  %h2 JRuby 1.0
+
 .date#date-2007-06-22
   %h2.single Zweite Railskonferenz in Frankfurt
+
+.date#date-2007-07-09
+  %h2.single Vortrag bei Lehmanns/Hamburg
 
 .date.slidegroup#date-2007-09-08
   .slide
@@ -176,10 +267,16 @@
   .slide
     %h2.single Most Innovative Application
     
-.date#date-2007-09-17
-  %h2.single 2.RailsConfEurope in Berlin
+.date.slidegroup#date-2007-09-16
+  .slide
+    %h2.single 2.RailsConfEurope in Berlin
+  .slide
+    %img(src="assets/photos/2007-09-16.jpg")
+
 
 .date.slidegroup#date-2007-12-08
+  .slide
+    %h2.single Rails 2.0 faves
   .slide
     %pre.prettyprint
       :preserve
@@ -213,11 +310,36 @@
   .slide
     %h2.single Quick without dirty
     
+.date#date-2008-02-18
+  %h2.single Github!
+  
+.date#date-2008-03-26
+  %ul
+    %li Pratik Naik > Coreteam
+    %li Jamis Buck > Alumni
+    %li Marcel Molina Jr. > Alumni
+    %li Nicholas Seckar > Alumni
+    %li Florian Weber > Alumni
+    %li Sam Stephenson > Alumni
+    %li Scott Barron > Alumni
+    %li Thomas Fuchs > Alumni
+    %li Tobias Lütke > Alumni
+
+.date.version#date-2008-04-05
+  %h2 JRuby 1.1 
+
+.date.version#date-2008-04-10
+  %h2 Github Live
+
 .date#date-2008-04-11
   %h2.single mod_passenger
 
 .date#date-2008-05-01
   %h2.single Twitter goes for Scala
+
+.date.version#date-2008-05-31
+  %h2 Ruby 1.8.7
+
 
 .date#date-2008-06-10
   %h2.single Dritte Railskonferenz in Frankfurt
@@ -236,18 +358,50 @@
         named_scope :active, :conditions => {:active => true}
         named_scope :inactive, :conditions => {:active => false}
         named_scope :recent, lambda { { :conditions => ['created_at > ?', 1.week.ago] } }
-        
+
+.date.image#date-2008-07-08
+  %img(src="assets/photos/2008-07-08.jpg")
+
+.date.image#date-2008-08-16
+  %h2 Josh Peek > Coreteam
+
 .date#date-2008-09-02
   %h2.single 3. RailsConfEurope in Berlin
+
+.date.image#date-2008-10-19
+  %img(src="assets/photos/2008-10-19.jpg")
+
 
 .date#date-2008-10-30
   %blockquote Chad Fowler is a werewolf
   %p - Giles Bowkett
 
+
+
 .date.version#date-2008-11-08
   %h2 Merb 1.0
 
-.date.slidegroup#date-2008-11-23
+.date.slidegroup#date-2008-11-11
+  .slide
+    %h2.single The Rails Myths
+  .slide
+    %h2.single Rails is hard to deploy
+  .slide
+    %h2.single Rails crashes
+  .slide
+    %h2.single Rails forces you to use Prototype.js
+  .slide
+    %h2.single Rails is a monolith
+  .slide
+    %h2.single Rails is hard because of Ruby
+  .slide
+    %h2.single Rails only speaks english
+  .slide
+    %h2.single First they ignore you
+  .slide
+    %h2.single ...
+
+.date.slidegroup#date-2008-11-30
   .slide
     %h2.single Rails 2.2 faves
   .slide
@@ -257,7 +411,29 @@
   .slide
     %h2.single Conditional get
 
+.date.slidegroup#date-2008-12-23
+  .slide
+    %h2.single Merb & Rails
+  .slide
+    %h2.single And then you win!
+
 -################################################################## 2009
+
+.date.version#date-2009-01-30
+  %h2 Ruby 1.9.1
+  %p First stable 1.9
+
+.date.slidegroup#date-2009-02-08
+  .slide
+    %h2.single A new hobby
+  .slide
+    %h2.single Arduino
+  .slide.image
+    %img(src="assets/photos/2009-02-08.jpg")
+
+.date.version#date-2009-03-16
+  %h2 JRuby 1.2.0
+
 .date.slidegroup#date-2009-03-18
   .slide
     %h2.single Rails 2.3 faves
@@ -287,3 +463,15 @@
     
 .date#date-2009-04-18
   %h2.single Perform like a pr0n star!
+
+.date#date-2009-05-26
+  %h2.single RailsWayCon
+
+.date.version#date-2009-06-03
+  %h2 JRuby 1.3.0
+
+.date#date-2009-08-19
+  %h2.single Why oh _why?
+
+.date.image.hold#date-2009-08-22
+  %img(src="assets/photos/2009-08-22.jpg")
