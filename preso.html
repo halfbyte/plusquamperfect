@@ -2,11 +2,13 @@
   <head>
     <title>Plusquamperfect</title>
     <meta http-equiv="content-type" value="text/html;charset=utf-8">
-    <link rel="stylesheet" href="pqp/stylesheets/slideshow.css" media="screen,projection">  
+    <link rel="stylesheet" href="pqp/stylesheets/slideshow.css" media="screen,projection">
+    <link rel="stylesheet" href="pqp/stylesheets/prettify.css" media="screen,projection">
     <script type="text/javascript" src="pqp/javascripts/jquery-1.3.2.min.js"></script>
     <script type="text/javascript" src="pqp/javascripts/plusquamperfect.js"></script>
+    <script type="text/javascript" src="pqp/javascripts/prettify.js"></script>
   </head>
-  <body>
+  <body onload="prettyPrint()">
 
     <div class="title">
       <img src="assets/railskonferenz-big.png">
@@ -19,9 +21,6 @@
     <!-- slides -->
     <div class='date' id='date-2004-01-10'>
   <h2 class='single'>ActiveRecord > RubyTalk</h2>
-</div>
-<div class='date version' id='date-2004-05-30'>
-  <h2>ActiveRecord 0.75</h2>
 </div>
 <div class='date slidegroup' id='date-2004-02-01'>
   <div class='slide'>
@@ -43,6 +42,33 @@
   <div class='slide'>
     <h2 class='single'>CSS-Layouts</h2>
   </div>
+  <div class='slide'>
+    <h2 class='single'>Barrierefreiheit</h2>
+  </div>
+  <div class='slide'>
+    <h2 class='single'>AJAX Evangelism</h2>
+  </div>
+</div>
+<div class='date' id='date-2004-03-01'>
+  <h2 class='single'>jan.krutisch.de/blog/</h2>
+  <p>(Zweites Blog-System)</p>
+</div>
+<div class='date slidegroup' id='date-2004-05-29'>
+  <div class='slide'>
+    <h2 class='single'>Rasterbator</h2>
+  </div>
+  <div class='slide'>
+    <h2 class='single'>Rasterizer</h2>
+  </div>
+  <div class='slide'>
+    <h2 class='single'>Java/Swing-GUI</h2>
+  </div>
+  <div class='slide'>
+    <h2 class='single'>Pro7-Vorfall</h2>
+  </div>
+</div>
+<div class='date version' id='date-2004-05-30'>
+  <h2>ActiveRecord 0.75</h2>
 </div>
 <div class='date slidegroup' id='date-2005-03-18'>
   <div class='slide'>
@@ -105,6 +131,14 @@
     <p>(0.4.2)</p>
   </div>
 </div>
+<div class='date slidegroup' id='date-2006-01-15'>
+  <div class='slide'>
+    <h2 class='single'>Erstes deutsches Rails-Buch</h2>
+  </div>
+  <div class='slide image'>
+    <img src='assets/rapidwebdevelopment_small.png' />
+  </div>
+</div>
 <div class='date' id='date-2006-02-20'>
   <h2>Deployment: mongrel</h2>
 </div>
@@ -115,13 +149,11 @@
 <div class='date' id='date-2006-03-15'>
   <h2>Twitter starts</h2>
 </div>
-<div class='date slidegroup' id='date-2006-01-15'>
-  <div class='slide'>
-    <h2 class='single'>Erstes deutsches Rails-Buch</h2>
-  </div>
-  <div class='slide image'>
-    <img src='assets/rapidwebdevelopment_small.png' />
-  </div>
+<div class='date' id='date-2006-03-29'>
+</div>
+<div class='date' id='date-2006-05-23'>
+  <h2>What's new in Edge Rails</h2>
+  <p>(Observer Generators)</p>
 </div>
 <div class='date slidegroup' id='date-2006-06-09'>
   <div class='slide'>
@@ -134,11 +166,17 @@
     <h2 class='single'>Lawyers were involved</h2>
   </div>
 </div>
+<div class='date' id='date-2006-08-24'>
+  <h2 class='single'>Amazon EC2</h2>
+</div>
 <div class='date' id='date-2006-09-12'>
   <h2 class='single'>Ein Buch-Auftrag</h2>
 </div>
 <div class='date' id='date-2006-09-14'>
   <h2 class='single'>1. RailsConfEurope in London</h2>
+</div>
+<div class='date' id='date-2006-10-10'>
+  <h2 class='single'>"Introducing the Merb"</h2>
 </div>
 <div class='date' id='date-2006-11-01'>
   <h2 class='single'>me@Qype</h2>
@@ -146,8 +184,10 @@
 <div class='date' id='date-2006-11-03'>
   <h2 class='single'>Erste Railskonferenz in Frankfurt</h2>
 </div>
-<div class='date' id='date-2007-01-23'>
-  <h2 class='single'>Mongrel 1.0(.1)</h2>
+<div class='date' id='date-2007-01-18'>
+</div>
+<div class='date version' id='date-2007-01-23'>
+  <h2>Mongrel 1.0(.1)</h2>
 </div>
 <div class='date' id='date-2007-03-06'>
   <h2 class='single'>rm -rf public/user_images/</h2>
@@ -181,8 +221,17 @@
 <div class='date' id='date-2007-09-17'>
   <h2 class='single'>2.RailsConfEurope in Berlin</h2>
 </div>
+<div class='date slidegroup' id='date-2007-12-08'>
+  <div class='slide'>
+    <pre class='prettyprint'>/books/10/edit&#x000A;# no more semicolons</pre>
+  </div>
+  <div class='slide'>
+    <pre class='prettyprint'>create_table "users", :force => true do |t| &#x000A;  t.integer :group_id, :employer_id&#x000A;  t.string :first, :last&#x000A;  t.timestamps&#x000A;end&#x000A;</pre>
+  </div>
+</div>
 <div class='date' id='date-2007-12-31'>
-  <h2 class='single'>Rails is a Ghetto</h2>
+  <blockquote>Rails is a Ghetto</blockquote>
+  <p>- Zed A. Shaw</p>
 </div>
 <div class='date slidegroup' id='date-2008-01-30'>
   <div class='slide'>
@@ -204,14 +253,27 @@
 <div class='date' id='date-2008-04-11'>
   <h2 class='single'>mod_passenger</h2>
 </div>
+<div class='date' id='date-2008-05-01'>
+  <h2 class='single'>Twitter goes for Scala</h2>
+</div>
 <div class='date' id='date-2008-06-10'>
   <h2 class='single'>Dritte Railskonferenz in Frankfurt</h2>
 </div>
-<div class='date' id='date-2007-09-02'>
+<div class='date' id='date-2008-06-02'>
+</div>
+<div class='date' id='date-2008-09-02'>
   <h2 class='single'>3. RailsConfEurope in Berlin</h2>
 </div>
 <div class='date' id='date-2008-10-30'>
-  <h2 class='single'>Chad Fowler is a werewolf</h2>
+  <blockquote>Chad Fowler is a werewolf</blockquote>
+  <p>- Giles Bowkett</p>
+</div>
+<div class='date version' id='date-2008-11-08'>
+  <h2>Merb 1.0</h2>
+</div>
+<div class='date' id='date-2008-11-22'>
+</div>
+<div class='date' id='date-2009-03-17'>
 </div>
 <div class='date' id='date-2009-04-18'>
   <h2 class='single'>Perform like a pr0n star!</h2>

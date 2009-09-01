@@ -135,6 +135,9 @@
 .date#date-2006-09-14
   %h2.single 1. RailsConfEurope in London
 
+.date#date-2006-10-10
+  %h2.single "Introducing the Merb"
+
 .date#date-2006-11-01
   %h2.single me@Qype
 
@@ -143,10 +146,7 @@
 
 -################################################################## 2007
 
-
-
-
-.date#date2007-01-18
+.date#date-2007-01-18
   -# TODO: 2007-01-19 Favourite Feature of Rails 1.2
 
 .date.version#date-2007-01-23
@@ -179,9 +179,21 @@
 .date#date-2007-09-17
   %h2.single 2.RailsConfEurope in Berlin
 
-.date#date-2007-12-07
-  -# TODO: Favourite Feature of Rails 2.0
-
+.date.slidegroup#date-2007-12-08
+  .slide
+    %pre.prettyprint
+      :preserve
+        /books/10/edit
+        # no more semicolons
+  .slide
+    %pre.prettyprint
+      :preserve
+        create_table "users", :force => true do |t| 
+          t.integer :group_id, :employer_id
+          t.string :first, :last
+          t.timestamps
+        end
+        
 .date#date-2007-12-31
   %blockquote Rails is a Ghetto
   %p - Zed A. Shaw
@@ -210,21 +222,68 @@
 .date#date-2008-06-10
   %h2.single Dritte Railskonferenz in Frankfurt
 
-.date#date-2008-06-02
-  -# Favourite Feature of Rails 2.1
-
+.date.slidegroup#date-2008-06-03
+  .slide
+    %h2.single Rails 2.1 faves
+  .slide
+    %pre.prettyprint
+      :preserve
+        > script/generate migration one
+            create  db/migrate/20080402122512_one.rb
+  .slide
+    %pre.prettyprint
+      :preserve
+        named_scope :active, :conditions => {:active => true}
+        named_scope :inactive, :conditions => {:active => false}
+        named_scope :recent, lambda { { :conditions => ['created_at > ?', 1.week.ago] } }
+        
 .date#date-2008-09-02
   %h2.single 3. RailsConfEurope in Berlin
 
 .date#date-2008-10-30
   %blockquote Chad Fowler is a werewolf
   %p - Giles Bowkett
-.date#date-2008-11-22
-  -# TODO: Favourite Feature of Rails 2.2
+
+.date.version#date-2008-11-08
+  %h2 Merb 1.0
+
+.date.slidegroup#date-2008-11-23
+  .slide
+    %h2.single Rails 2.2 faves
+  .slide
+    %h2.single i18n!
+  .slide
+    %h2.single Shallow routes
+  .slide
+    %h2.single Conditional get
 
 -################################################################## 2009
-.date#date-2009-03-17
-  -# TODO: Favourite Feature of 2.3
-
+.date.slidegroup#date-2009-03-18
+  .slide
+    %h2.single Rails 2.3 faves
+  .slide
+    %h2.single Application templates
+  .slide
+    %h2.single Rack/Metal
+  .slide
+    %pre.prettyprint
+      :preserve
+        nil.try(:nice)
+  .slide
+    %h2.single Nested Model Mass Assignment
+  .slide
+    %pre.prettyprint
+      :preserve
+        Article.scoped_by_published_and_user_id(true, 1).find(:all, :limit => 5)
+  .slide
+    %pre.prettyprint
+      :preserve
+        article.find_in_batches(batch_size => 100 ) { |articles| 
+          articles.each { |a| ... } }
+  .slide
+    %h2.single Engines
+  .slide
+    %h2.single Simplified render
+    
 .date#date-2009-04-18
   %h2.single Perform like a pr0n star!

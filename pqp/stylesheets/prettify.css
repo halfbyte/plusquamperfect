@@ -1,16 +1,16 @@
 /* Pretty printing styles. Used with prettify.js. */
 
 .str { color: #0f0; }
-.kwd { color: #00f; }
+.kwd { color: #88f; }
 .com { color: #f00; }
 .typ { color: #c0c; }
 .lit { color: #0cc; }
 .pun { color: #cc0; }
 .pln { color: #fff; }
-.tag { color: #00f; }
+.tag { color: #ccf; }
 .atn { color: #c0c; }
-.atv { color: #0f0; }
-.dec { color: #c0c; }
+.atv { color: #cfc; }
+.dec { color: #c4c; }
 pre.prettyprint { font-family: Andale Mono, mono; font-size: 1em; }
 
 @media print {
