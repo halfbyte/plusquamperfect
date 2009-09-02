@@ -30,6 +30,7 @@
       color: #ffc;
       opacity: 0.8;
       padding: 20px;
+      z-index: 11;
     }
 
     .date img, .title img { float:right; vertical-align:top; margin-left: 2em; margin-bottom:2em;}
@@ -94,3 +95,5 @@
       background:#ccc;
       width:100%;
     }
+
+    .slidegroup { z-index:10; background-color: #000;}

@@ -212,7 +212,7 @@
         
         
         if (posInArray != -1) {
-          if (!$("#" + dates[posInArray].id).hasClass("version")) $(".date").fadeOut("fast");
+          if (!$("#" + dates[posInArray].id).hasClass("version") && !$("#" + dates[posInArray].id).hasClass("slidegroup")) $(".date").fadeOut("fast");
 
           $("#" + dates[posInArray].id).fadeIn("slow");
           updatePresenterPreview($("#" + dates[posInArray].id).html());
