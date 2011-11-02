@@ -132,7 +132,7 @@
 .date.slidegroup#date-2006-02-20
   .slide
     %h2 Deployment: mongrel
-    %o mod_proxy_balancer
+    %p mod_proxy_balancer
     %p (Apache 2.1)
     %p oder nginx
 
@@ -144,10 +144,6 @@
 
 .date#date-2006-03-13
   %h2 Vortrag Ramon + me Cebit iX-Forum
-
-.date.slidegroup#date-2006-03-21
-  .slide
-    %h2 Pentax ist*DS
 
 .date#date-2006-05-14
   %h2 JRuby runs Rails
@@ -254,23 +250,12 @@
   .slide
     %img(src="assets/photos/2007-09-16.jpg")
     
-.date.slidegroup#date-2007-12-08
-  .slide
-    %h2.single Rails 2.0 faves
-  .slide
-    %pre.prettyprint
-      :preserve
-        /books/10/edit
-        # no more semicolons
-  .slide
-    %pre.prettyprint
-      :preserve
-        create_table "users", :force => true do |t| 
-          t.integer :group_id, :employer_id
-          t.string :first, :last
-          t.timestamps
-        end
-        
+.date#date-2007-12-08
+  %h2 Die Semicolon, die!
+  %pre.prettyprint
+    :preserve
+      /books/10/edit
+              
 .date#date-2007-12-31
   %blockquote 
     %p Rails is a Ghetto
@@ -327,20 +312,13 @@
 .date#date-2008-06-10
   %h2.single Dritte Railskonferenz in Frankfurt
 
-.date.slidegroup#date-2008-06-03
-  .slide
-    %h2.single Rails 2.1 faves
-  .slide
-    %pre.prettyprint
-      :preserve
-        > script/generate migration one
-            create  db/migrate/20080402122512_one.rb
-  .slide
-    %pre.prettyprint
-      :preserve
-        named_scope :active, :conditions => {:active => true}
-        named_scope :inactive, :conditions => {:active => false}
-        named_scope :recent, lambda { { :conditions => ['created_at > ?', 1.week.ago] } }
+.date#date-2008-06-03
+  %h2 Named Scopes ftw!
+  %pre.prettyprint
+    :preserve
+      named_scope :active, :conditions => {:active => true}
+      named_scope :inactive, :conditions => {:active => false}
+      named_scope :recent, lambda { { :conditions => ['created_at > ?', 1.week.ago] } }
 
 .date.image#date-2008-07-08
   %img(src="assets/photos/2008-07-08.jpg")
@@ -384,7 +362,7 @@
   .slide
     %h2.single ...
   .slide
-    %h2.single Rails 2.2 faves
+    %h2.single Rails 2.2
   .slide
     %h2.single i18n!
   .slide
@@ -415,7 +393,7 @@
 
 .date.slidegroup#date-2009-03-18
   .slide
-    %h2.single Rails 2.3 faves
+    %h2.single Rails 2.3
   .slide
     %h2.single Application templates
   .slide
@@ -423,27 +401,13 @@
   .slide
     %pre.prettyprint
       :preserve
-        nil.try(:nice)
-  .slide
-    %h2.single Nested Model Mass Assignment
-  .slide
-    %pre.prettyprint
-      :preserve
-        Article.scoped_by_published_and_user_id(true, 1).find(:all, :limit => 5)
-  .slide
-    %pre.prettyprint
-      :preserve
         article.find_in_batches(batch_size => 100 ) { |articles| 
           articles.each { |a| ... } }
-  .slide
-    %h2.single Engines
-  .slide
-    %h2.single Simplified render
     
 .date#date-2009-05-15
   %blockquote 
     %p Perform like a pr0n star!
-    %p with hot grrrls
+    %p with hot grrrls!
     %p Profit!
   %p -Matt Aimonetti
 
